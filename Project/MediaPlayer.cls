@@ -15,7 +15,7 @@ Attribute VB_Exposed = True
 '
 '   名称: MediaPlayer.cls
 '   日期: 2005-09-03
-'   作者: Qf
+'   作者: denglf
 '   描述: 多媒体文件播放控制类,该类需要引入"ActiveMovie control type library(QUARTZ.DLL)"
 '
 '*********************************************************************************************
@@ -23,7 +23,7 @@ Option Explicit
 
 Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
 Private Declare Function FindWindowEx Lib "user32" Alias "FindWindowExA" (ByVal hWnd1 As Long, ByVal hWnd2 As Long, ByVal lpsz1 As String, ByVal lpsz2 As String) As Long
-Private Declare Function GetClassName Lib "user32" Alias "GetClassNameA" (ByVal hwnd As Long, ByVal lpClassName As String, ByVal nMaxCount As Long) As Long
+Private Declare Function GetClassName Lib "user32" Alias "GetClassNameA" (ByVal hWnd As Long, ByVal lpClassName As String, ByVal nMaxCount As Long) As Long
 Private Declare Function PlaySoundData Lib "winmm.dll" Alias "PlaySoundA" (lpData As Any, ByVal hModule As Long, ByVal dwFlags As Long) As Long
 Private Declare Function PlaySound Lib "winmm.dll" Alias "PlaySoundA" (ByVal lpszName As String, ByVal hModule As Long, ByVal dwFlags As Long) As Long
 
@@ -103,13 +103,13 @@ Public Enum MediaTypeConstants
 End Enum
 
 Private Type RECT
-    Left As Long
-    TOP As Long
-    Right As Long
-    Bottom As Long
+    left As Long
+    top As Long
+    right As Long
+    bottom As Long
 End Type
-Private Declare Function IsWindow Lib "user32" (ByVal hwnd As Long) As Long
-Private Declare Function GetWindowRect Lib "user32" (ByVal hwnd As Long, lpRect As RECT) As Long
+Private Declare Function IsWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function GetWindowRect Lib "user32" (ByVal hWnd As Long, lpRect As RECT) As Long
 
 Private m_FilgrpManager As FilgraphManager
 Private m_VideoWnd As IVideoWindow
@@ -218,7 +218,7 @@ Public Function OpenMediaFile(ByVal strFileName As String, Optional ByVal hWndOw
         m_FilgrpManager.Stop
     End If
     
-    strTemp = UCase$(Right$(strFileName, 3))
+    strTemp = UCase$(right$(strFileName, 3))
     If strTemp = "AVI" Or _
         strTemp = "ASF" Or _
         strTemp = "WMV" Or _
@@ -237,7 +237,7 @@ Public Function OpenMediaFile(ByVal strFileName As String, Optional ByVal hWndOw
         ' 获得目标窗口的客户区域大小
         GetWindowRect hWndOwner, lpRect
         ' 将视频图像填满整个窗口
-        m_VideoWnd.SetWindowPosition 0, 0, lpRect.Right - lpRect.Left, lpRect.Bottom - lpRect.TOP
+        m_VideoWnd.SetWindowPosition 0, 0, lpRect.right - lpRect.left, lpRect.bottom - lpRect.top
         ' 保存目标窗口句柄,在设置视频的回放,改变视频大小时要用到
         m_OwnerhWnd = hWndOwner
         ' 标记当前打开的文件类型为视频
@@ -297,9 +297,9 @@ End Function
 '//
 '// 获得视频窗口句柄
 '//
-Public Property Get hwnd() As Long
+Public Property Get hWnd() As Long
     
-    hwnd = m_VideohWnd
+    hWnd = m_VideohWnd
     
 End Property
 
@@ -365,7 +365,7 @@ End Sub
 '// 改变视频窗口尺寸
 '//
 Public Sub ChangeVideoWindowSize(Optional ByVal bStretch As Boolean = True, _
-    Optional ByVal Left As Long, Optional ByVal TOP As Long, _
+    Optional ByVal left As Long, Optional ByVal top As Long, _
     Optional ByVal Width As Long, Optional ByVal Height As Long)
     Dim lpRect As RECT
     Dim lWidth As Long, lHeight As Long
@@ -379,8 +379,8 @@ Public Sub ChangeVideoWindowSize(Optional ByVal bStretch As Boolean = True, _
            If bStretch = True Then
           
               GetWindowRect m_OwnerhWnd, lpRect
-              lWidth = lpRect.Right - lpRect.Left
-              lHeight = lpRect.Bottom - lpRect.TOP
+              lWidth = lpRect.right - lpRect.left
+              lHeight = lpRect.bottom - lpRect.top
               m_VideoWnd.SetWindowPosition 0, 0, _
               lWidth, lHeight
           
@@ -388,7 +388,7 @@ Public Sub ChangeVideoWindowSize(Optional ByVal bStretch As Boolean = True, _
               lWidth = Width
               lHeight = Height
               GetWindowRect m_OwnerhWnd, lpRect
-              m_VideoWnd.SetWindowPosition Left, TOP, _
+              m_VideoWnd.SetWindowPosition left, top, _
               lWidth, lHeight
               
            End If
@@ -421,7 +421,7 @@ Public Sub AutoChangeVideoSize()
        If IsWindow(m_OwnerhWnd) Then
           
           GetWindowRect m_OwnerhWnd, lpRect
-          lWidth = lpRect.Right - lpRect.Left: lHeight = lpRect.Bottom - lpRect.TOP
+          lWidth = lpRect.right - lpRect.left: lHeight = lpRect.bottom - lpRect.top
           pLeft = m_Video.SourceLeft: pTop = m_Video.SourceTop
           pWidth = m_Video.SourceWidth: pHeight = m_Video.SourceHeight
           lNewW = pWidth: lNewH = pHeight

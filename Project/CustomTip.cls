@@ -11,6 +11,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'//
+'// 名称：CustomTip(.cls)
+'// 描述：自定义提示
+'// 作者：denglf
+'// 日期：2018-05-06
+'//
+
 Option Explicit
 
 Private Const SPACEAREA As Long = 4     ' 最小间隙
