@@ -1046,7 +1046,7 @@ Private Function ChangeWindowStyles(ByVal ThWnd As Long) As Long
   SetWindowLongA ThWnd, GWL_STYLE, TFlat      '//-- Change attributes of the specified window.
   
   TFlat = GetWindowLong(ThWnd, GWL_EXSTYLE)  '//-- Retrieve information about the specified window.
-  TFlat = TFlat And Not WS_EX_CLIENTEDGE     '//-- Specifies that the window doesn't have a 3D look — that is, Flat Border Style.
+  TFlat = TFlat And Not WS_EX_CLIENTEDGE     '//-- Specifies that the window doesn't have a 3D look ?that is, Flat Border Style.
   SetWindowLongA ThWnd, GWL_EXSTYLE, TFlat   '//-- Change attributes of the specified window.
       
   '//-- The SetWindowPos function changes the size, position, and Z order of a child, pop-up, or top-level window.
