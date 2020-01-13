@@ -1,6 +1,5 @@
 # ToolTips
 ToolTips是vb6开发的一个支持阴影和透明效果的自定义工具提示，稳定可靠，外观漂亮，简单易用。   
-可以说ToolTips是TGdi.dll和TSubclass.dll的第一个应用实例。   
    
 项目依赖：   
 TGdi.dll   
