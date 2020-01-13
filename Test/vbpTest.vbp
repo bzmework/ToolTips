@@ -1,6 +1,6 @@
 Type=Exe
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\Windows\SysWOW64\stdole2.tlb#OLE Automation
-Reference=*\G{A9E68A2B-4BA2-436A-95BD-E484C64D9C36}#1.0#0#TToolTip.dll#eLung ToolTip Library
+Reference=*\G{B9712223-FD90-4642-BA71-66DDE7945D50}#1.0#0#TToolTip.dll#eLong ToolTip Library
 Form=frmMain.frm
 Module=modMain; modMain.bas
 ResFile32="XpStyles.res"
